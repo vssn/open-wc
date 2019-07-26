@@ -1,0 +1,21 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:10.12.0-browsers
+
+jobs:
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+
+      # build what needs to be build so we can use it in the next steps
+      - run: npm run build
+
+      # run lint
+      - run: npm run lint
+
+      # run tests
+      - run: npm run test

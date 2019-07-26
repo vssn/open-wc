@@ -11,6 +11,7 @@ import AppLitElementMixin from '../app-lit-element/index.js';
 import WcLitElementMixin from '../wc-lit-element/index.js';
 
 import header from './header.js';
+import AutomatingMixin from '../automating/index.js';
 
 /**
  * Allows to control the data via command line
@@ -77,6 +78,7 @@ export const AppMixin = subclass =>
               { title: 'Testing', value: 'testing' },
               { title: 'Demoing', value: 'demoing' },
               all.scaffoldType !== 'wc' && { title: 'Building', value: 'building' },
+              { title: 'Automating', value: 'automating' },
             ].filter(_ => !!_),
           onState: state => {
             state.value.forEach(meta => {
@@ -156,6 +158,9 @@ export const AppMixin = subclass =>
           }
           if (feature === 'demoing') {
             mixins.push(DemoingStorybookMixin);
+          }
+          if (feature === 'automating') {
+            mixins.push(AutomatingMixin);
           }
           if (feature === 'building') {
             switch (this.options.buildingType) {
